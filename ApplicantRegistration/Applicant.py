@@ -25,10 +25,10 @@ def connect_db():
 def create_table(connection, curr):
     try:
         table="""CREATE TABLE Applicant ( 
-                             applicant_Id int auto_increment,
+                             applicant_Id int,
                              first_name varchar(25) NOT NULL,
                              last_name varchar(25) NOT NULL,
-                             phone_number int NOT NULL,
+                             phone_number varchar(10) NOT NULL,
                              city varchar(20) NOT NULL,
                              salary int NOT NULL,
                              department varchar (20));"""
@@ -42,8 +42,7 @@ def create_table(connection, curr):
 def insert_value(connection, curr, lst):
     try:
         
-        mySql_insert_query = "INSERT INTO Applicant (applicant_id, first_name, last_name,phone_number, salary, department)"
-        f"VALUES(NULL, {lst[0]}, {lst[1]}, {lst[2]}, {lst[3]},{lst[4]},{lst[5]});"
+        mySql_insert_query = f"INSERT INTO Applicant (applicant_id, first_name, last_name,phone_number, city, salary, department) VALUES(null, '{lst[0]}', '{lst[1]}', '{lst[2]}', '{lst[3]}','{lst[4]}','{lst[5]}');"
         curr.execute(mySql_insert_query)
         connection.commit()
         print(curr.rowcount, "Record inserted successfully into Applicant table")
